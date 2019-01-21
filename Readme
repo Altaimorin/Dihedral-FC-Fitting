@@ -1,1 +1,7 @@
-First, run grid.in to generate 1296 configures of YOPRO in vac
+Grid_and_Orca:
+Run grid.in to generate 1296 configures of YOPRO in vac
+Run excited.cpp to generate inputs of S1 for Orca
+Run exec_mul.sh to generate job submission script.
+Run submit.sh to run all jobs
+
+FC fitting:
