@@ -19,7 +19,7 @@ int main()
         a[i]= new double[4];
         b[i]= new double[4];
     }
-    ifstream input("amber_YOPRO_s0_4cos.txt");
+    ifstream input("d1_YOPRO_s1_4cos.txt");
     string mark="Coefficients (with 95% confidence bounds):";
     string temp_str=" ";
     string skip = " ";
