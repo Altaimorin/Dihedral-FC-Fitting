@@ -1,0 +1,41 @@
+trajin conf1.crd
+trajin conf2.crd
+trajin conf3.crd
+trajin conf4.crd
+trajin conf5.crd
+trajin conf6.crd
+trajin conf7.crd
+trajin conf8.crd
+trajin conf9.crd
+trajin conf10.crd
+trajin conf11.crd
+trajin conf12.crd
+trajin conf13.crd
+trajin conf14.crd
+trajin conf15.crd
+trajin conf16.crd
+trajin conf17.crd
+trajin conf18.crd
+trajin conf19.crd
+trajin conf20.crd
+......
+trajin conf1280.crd
+trajin conf1281.crd
+trajin conf1282.crd
+trajin conf1283.crd
+trajin conf1284.crd
+trajin conf1285.crd
+trajin conf1286.crd
+trajin conf1287.crd
+trajin conf1288.crd
+trajin conf1289.crd
+trajin conf1290.crd
+trajin conf1291.crd
+trajin conf1292.crd
+trajin conf1293.crd
+trajin conf1294.crd
+trajin conf1295.crd
+trajin conf1296.crd
+trajout combined.crd
+
+                                                                                                                                              1,1           Top
