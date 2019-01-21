@@ -1,4 +1,4 @@
-diary('amber_YOPRO_s1_4cos.txt')
+diary('d1_YOPRO_s1_4cos.txt')
 for i=-180:1:180
 string = strcat('d1_at_',int2str(i),'.txt')
 %output = strcat('d1_at_',int2str(i),'_output.txt')
