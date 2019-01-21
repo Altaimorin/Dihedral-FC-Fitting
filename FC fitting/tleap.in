@@ -1,0 +1,14 @@
+source leaprc.ff15ipq_10.3
+source leaprc.gaff
+loadAmberParams YOPRO.frcmod
+loadAmberPrep YOPRO.prepi
+watp = loadAmberParams frcmod.spceb
+loadOff atomic_ions.lib
+loadOff solvents.lib
+HOH = SPC
+WAT = SPC
+x = loadPdb YOPRO.pdb
+setBox x vdw 15.0
+saveAmberParm x YOPRO.top YOPRO.crd
+quit
+
