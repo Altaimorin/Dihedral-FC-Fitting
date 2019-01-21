@@ -1,0 +1,28 @@
+&files
+  -p       vac_YOPRO.top
+  -c       vac_YOPRO.crd
+  -o       confsamp.out
+&end
+
+&configs
+  verbose 1
+  % Operations
+  GridSample :1@C2 :1@C6  :1@C10 :1@C11   { -180.0  180.0 } Krst 200.0
+  GridSample :1@C6 :1@C10  :1@C11 :1@O1   { -180.0  180.0 } Krst 200.0
+  combine 1 2
+
+  % Control parameters governing the configuration generation
+  count = 1296,
+  ig = 537618,
+  ncyc = 100,
+  maxcyc = 1200,
+
+  % resampling plans
+  nshuffle = 5,
+  shuffle = 'jackknife'
+
+  % Output conditions
+  write    'pdb', 'inpcrd','orca'
+  outbase  'conf',
+  outsuff  'pdb', 'crd','orca'
+&end
