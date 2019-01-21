@@ -1,7 +1,18 @@
 Grid_and_Orca:
-Run grid.in to generate 1296 configures of YOPRO in vac
-Run excited.cpp to generate inputs of S1 for Orca
-Run exec_mul.sh to generate job submission script.
-Run submit.sh to run all jobs
+1.Run grid.in to generate 1296 configurations of YOPRO in vacuum.
+2.Run excited.cpp to generate inputs of S1 for Orca.
+3.Run exec_mul.sh to generate job submission script.
+4.Run submit.sh to run all jobs
 
-FC fitting:
+Calculate quantum single point energy:
+5.Run get_orca_energy.cpp to get quantum single energy value of each configuration and write single_point.txt.
+
+Calculated classical potential energy with the fitted diherdals excluded:
+6.Create YOPRO.frcmod to turn off the fitted dihedral FCs.
+7.Run tleap.in to get .top of YOPRO with charges fitted in water.
+8.Create min.sh using conf${a}.crd from the previous step 1 to generate min_${a}.in and run one step minimization
+9.Run exec_min.qsub to run min.sh.
+10. Run get_amber_energy.cpp to get classical potential energy with the fitted diherdals excluded from min_*.out.
+
+Caculated pure tortional contribution of the fitted diherdals:
+11. Run substract.cpp to get pure tortional contribution of the fitted diherdals.
