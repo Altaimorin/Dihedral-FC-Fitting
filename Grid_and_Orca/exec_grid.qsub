@@ -1,0 +1,10 @@
+!/bin/bash -login
+#PBS -l walltime=4:00:00,mem=8gb,nodes=1:ppn=1
+#PBS -j oe
+
+cd ${PBS_O_WORKDIR}
+
+export AMBERHOME=/mnt/home/jinchi/AMBERTOOLS16/amber16
+${AMBERHOME}/bin/mdgx -O -i grid.in
+
+qstat -f $PBS_JOBID
