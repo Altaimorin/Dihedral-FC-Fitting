@@ -1,5 +1,7 @@
+S1 YOPRO as the example:
+
 Grid_and_Orca:
-1.Run grid.in to generate 1296 configurations of YOPRO in vacuum.
+1.Run exec_grid.qsub to run grid.in to generate 1296 configurations of YOPRO in vacuum.
 2.Run excited.cpp to generate inputs of S1 for Orca.
 3.Run exec_mul.sh to generate job submission script.
 4.Run submit.sh to run all jobs
@@ -7,12 +9,34 @@ Grid_and_Orca:
 Calculate quantum single point energy:
 5.Run get_orca_energy.cpp to get quantum single energy value of each configuration and write single_point.txt.
 
+Check dihedrals:
+6.Run ptraj vac_YOPRO.top < combine.in to combine all 36*36 trajectories.
+7.Run ptraj vac_YOPRO.top < dihedral.in get corresponding d1 and d2 values, remove nan lines, and creat d1_d2 and d2_d1.
+
 Calculated classical potential energy with the fitted diherdals excluded:
-6.Create YOPRO.frcmod to turn off the fitted dihedral FCs.
-7.Run tleap.in to get .top of YOPRO with charges fitted in water.
-8.Create min.sh using conf${a}.crd from the previous step 1 to generate min_${a}.in and run one step minimization
-9.Run exec_min.qsub to run min.sh.
-10. Run get_amber_energy.cpp to get classical potential energy with the fitted diherdals excluded from min_*.out.
+8.Create YOPRO.frcmod to turn off the fitted dihedral FCs.
+9.Run tleap.in to get .top of YOPRO with charges fitted in water.
+10.Create min.sh using conf${a}.crd from the previous step 1 to generate min_${a}.in and run one step minimization
+11.Run exec_min.qsub to run min.sh.
+12. Run get_amber_energy.cpp to get classical potential energy with the fitted diherdals excluded from min_*.out.
 
 Caculated pure tortional contribution of the fitted diherdals:
-11. Run substract.cpp to get pure tortional contribution of the fitted diherdals.
+13. Run substract.cpp to get pure tortional contribution of the fitted diherdals writen to substract_energy.txt.
+
+Slicing:
+d1:
+14. Run awk '{print $7}' substract_energy.txt > kcal.txt
+15. Run cat d1_d2 kcal.txt >d1__d2_kcal.txt
+16. In d1__d2_kcal.txt, seperate each two adjacent fixed d1 values with the string “9999 9999 9999” which is the separation line.
+17. Run d1_make_slice.cpp, get a bunch of “d1_at_X.txt”. Collect all “X” values to make the file “fix_d1_namelist.txt”.
+18. Run d1_amber_fit.m, get the diary output “d1_YOPRO_s1_4cos.txt”, which is a diary output file.
+19. Run d1_make_gaffpieces.cpp, get “fix_d1_fc_slice.txt”.
+d2:
+Input file : “d1__d2_kcal_gnup.txt” is a copy of “d1__d2_kcal.txt” with all separation lines “9999 9999 9999” deleted.
+20. run transpose.cpp to transpose d1__d2_kcal_gnup.txt into “d2__d1_kcal.txt”. Add the separation lines to separate adjacent d2 values.
+21. Run d2_make_slice.cpp, get a bunch of “d2_at_X.txt”, make the file “fix_d2_namelist.txt”.
+22. Run d2_amber_fit.m, get the diary output “d2_YOPRO_s1_4cos.txt”, which is a diary output file.
+23. Run d2_make_gaffpieces.cpp, get “fix_d2_fc_slice.txt”.
+
+Generate final frcmod files:
+24. Run creat_frcmod.cpp to obtain all frcmod files for the umbrella samplings.
